@@ -1,13 +1,23 @@
+<?php get_header();   
 
-<?php get_header();   ?>
-    <div id="banner">
-        <h1>&lt;<?php the_title(); ?>&gt;</h1>
-        <h3>Learn coding from scratch</h3>
+// echo '<pre>';
+// // print_r(get_field('button'));
+// $button = get_field('button');
+
+// echo $button['title'];
+// echo $button['url'];
+// echo '</pre>';
+// die();
+
+?>
+    <div id="banner" style="background:url('<?php echo get_field('background_image')['url'] ?>')">
+        <h1>&lt;<?php the_field('title')?>&gt;</h1>
+        <h3><?php the_field('subtitle') ?></h3>
     </div>
 
     <main>
         <a href="<?php echo site_url('/blog'); ?>">
-            <h2 class="section-heading">All Blogs</h2>
+            <h2 class="section-heading"><?php the_field('blog title') ?></h2>
         </a>
         <section>
         <?php 
@@ -36,13 +46,24 @@
                 </div>
 
                 <div class="card-description">
+               
+                    
+                    
                     <a href="<?php the_permalink(); ?>">
                         <h3><?php the_title();?></h3>
                     </a>
                     <p>
                        <?php echo wp_trim_words(get_the_excerpt(),30); ?>
                     </p>
-                    <a href="<?php the_permalink();?>" class="btn-readmore">Read more</a>
+                    
+                    <a  
+                    <?php 
+                        $button = get_field('button') 
+                    ?>
+                    class="btn-readmore"
+                    href="<?php permalink_link() ?>">
+                    Read more
+                    </a>
                 </div>
             </div>
 
@@ -52,7 +73,7 @@
         </section>
          
         <a href="/projects">
-        	<h2 class="section-heading">All Projects</h2>
+        	<h2 class="section-heading"><?php the_field('project title') ?></h2>
     	</a>
         
         <section>
@@ -97,12 +118,11 @@
             wp_reset_query(); ?>
         </section>
 
-        <h2 class="section-heading">Source Code</h2>
+        <h2 class="section-heading"><?php the_field('bottom title') ?></h2>
 
         <section id="section-source">
             <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum neque qui delectus ad dolor blanditiis perferendis praesentium
-                consectetur aut sed provident obcaecati aspernatur perspiciatis, dolores nobis pariatur ipsum vel corrupti!
+               <?php the_field('bottom text') ?>
             </p>
             <a href="#" class="btn-readmore">GitHub Profile</a>
         </section>
